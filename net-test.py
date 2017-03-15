@@ -6,9 +6,13 @@ import re
 import numpy
 from collections import Counter
 import string
-#import netfunctions
 #from keras.models import Sequential
-#from keras.layers import Dense
+#from keras.models import load_model
+#from keras.layers.core import Dense, Dropout, Activation, Flatten
+#from keras.layers.convolutional import Convolution2D, MaxPooling2D, AveragePooling2D
+#from keras.optimizers import SGD
+#from keras.utils import np_utils
+#import netfunctions
 
 #seed
 seed = 7
@@ -58,7 +62,7 @@ for i in rawdata:
 
 str1=''
 for i in xwords:
-    i = str(i).translate(None, string.punctuation)
+    i = str(i).translate(string.punctuation)
     temp.append(i)
     str1 += ' '+i
     
@@ -77,3 +81,25 @@ for i in temp:
     for j in a:
         b.append(dict[j])
     x.append(b)
+
+"""
+NEURAL NETWORK STARTS HERE
+"""
+
+x = [[1, -4, 8], [2,1] [-4, 3, 2]]
+model = Sequential()
+print('adding hidden layer')
+model.add(Dense(3, input_dim=1, init='uniform', activation='relu'))
+print('adding output layer')
+model.add(Dense(1, init='uniform', activation='softmax'))
+# Compile model
+print('compiling')
+sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
+model.compile(loss='binary_crossentropy', optimizer=sgd)
+# Fit the model
+print('fitting')
+model.fit(x, y, nb_epoch=40, batch_size=10)
+# evaluate the model
+scores = model.evaluate(x, y)
+print("%s: %.2f%%" % (model.metrics_names[1], scores[1]*100))
+
