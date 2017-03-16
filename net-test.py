@@ -89,7 +89,6 @@ for i in temp:
     x.append(b)
 
 longest_sample_len = len(max(x,key=len))
-<<<<<<< HEAD
 half = len(x)/2
 
 
@@ -122,31 +121,3 @@ if pelican > 0:
             # evaluate the model
             scores = model.evaluate(test_x, test_y, batch_size=32, verbose=0)
             print("Epochs: " +str(epochs) + " | Batch size: "+ str(k)+ " | Accuracy: " + str(round(scores[1]*100, 2))+"%\n")
-=======
-if pelican > 0:
-    """
-    NEURAL NETWORK STARTS HERE
-    """
-    x = sequence.pad_sequences(x, maxlen=longest_sample_len)
-
-    model = Sequential()
-    
-    #add layers
-    model.add(Embedding(6000, 32))
-    model.add(LSTM(32))
-    model.add(Dense(3, activation='relu'))
-    model.add(Dense(1, activation='softmax'))
-    
-    # Compile model
-    model.compile(loss='binary_crossentropy', optimizer='adam')
-    
-    # Fit the model
-    print(model.summary())
-    model.fit(x, y, nb_epoch=40, batch_size=10)
-    
-    # evaluate the model
-    scores = model.evaluate(x, y)
-    print("%s: %.2f%%" % (model.metrics_names[1], scores[1]*100))
->>>>>>> origin/master
-    
-
