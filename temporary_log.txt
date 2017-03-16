@@ -1,0 +1,51 @@
+Epochs: 10 | Batch size: 5 | Accuracy: 79.46%
+
+Epochs: 10 | Batch size: 10 | Accuracy: 85.17%
+
+Epochs: 10 | Batch size: 15 | Accuracy: 83.22%
+
+Epochs: 10 | Batch size: 20 | Accuracy: 81.9%
+
+Epochs: 10 | Batch size: 25 | Accuracy: 80.55%
+
+Epochs: 10 | Batch size: 30 | Accuracy: 80.55%
+
+Epochs: 10 | Batch size: 35 | Accuracy: 80.55%
+
+Epochs: 10 | Batch size: 40 | Accuracy: 80.55%
+
+Epochs: 10 | Batch size: 45 | Accuracy: 80.55%
+
+Epochs: 32 | Batch size: 5 | Accuracy: 86.43%
+
+pochs: 32 | Batch size: 10 | Accuracy: 86.27%
+
+Epochs: 32 | Batch size: 15 | Accuracy: 86.19%
+
+Epochs: 32 | Batch size: 20 | Accuracy: 85.82%
+
+Epochs: 32 | Batch size: 25 | Accuracy: 85.77%
+
+Epochs: 32 | Batch size: 30 | Accuracy: 84.9%
+
+Epochs: 32 | Batch size: 35 | Accuracy: 85.43%
+
+Epochs: 32 | Batch size: 40 | Accuracy: 85.09%
+
+Epochs: 32 | Batch size: 45 | Accuracy: 82.85%
+
+Epochs: 100 | Batch size: 5 | Accuracy: 85.57%
+
+Epochs: 100 | Batch size: 10 | Accuracy: 86.19%
+
+Epochs: 100 | Batch size: 15 | Accuracy: 86.19%
+Epochs: 100 | Batch size: 20 | Accuracy: 86.49%
+Epochs: 100 | Batch size: 25 | Accuracy: 86.19%
+
+Epochs: 100 | Batch size: 30 | Accuracy: 86.27%
+
+Epochs: 100 | Batch size: 35 | Accuracy: 86.11%
+
+Epochs: 100 | Batch size: 40 | Accuracy: 86.36%
+
+Epochs: 100 | Batch size: 45 | Accuracy: 81.65%

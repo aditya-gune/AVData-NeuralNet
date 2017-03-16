@@ -1,18 +1,24 @@
 # -*- coding: utf-8 -*-
 """
-
+ADITYA GUNE
 """
+import sys
 import re
 import numpy
 from collections import Counter
 import string
-#from keras.models import Sequential
-#from keras.models import load_model
-#from keras.layers.core import Dense, Dropout, Activation, Flatten
-#from keras.layers.convolutional import Convolution2D, MaxPooling2D, AveragePooling2D
-#from keras.optimizers import SGD
-#from keras.utils import np_utils
-#import netfunctions
+
+pelican = int(sys.argv[1])
+if pelican > 0:
+    from keras.preprocessing import sequence
+    from keras.models import Sequential
+    from keras.models import load_model
+    from keras.layers import LSTM
+    from keras.layers.embeddings import Embedding
+    from keras.layers.core import Dense, Dropout, Activation, Flatten
+    #from keras.layers.convolutional import Convolution2D, MaxPooling2D, AveragePooling2D
+    from keras.optimizers import SGD
+    from keras.utils import np_utils
 
 #seed
 seed = 7
@@ -62,7 +68,7 @@ for i in rawdata:
 
 str1=''
 for i in xwords:
-    i = str(i).translate(string.punctuation)
+    i = str(i).translate(None, string.punctuation)
     temp.append(i)
     str1 += ' '+i
     
@@ -82,24 +88,38 @@ for i in temp:
         b.append(dict[j])
     x.append(b)
 
-"""
-NEURAL NETWORK STARTS HERE
-"""
+longest_sample_len = len(max(x,key=len))
+half = len(x)/2
 
-x = [[1, -4, 8], [2,1] [-4, 3, 2]]
-model = Sequential()
-print('adding hidden layer')
-model.add(Dense(3, input_dim=1, init='uniform', activation='relu'))
-print('adding output layer')
-model.add(Dense(1, init='uniform', activation='softmax'))
-# Compile model
-print('compiling')
-sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
-model.compile(loss='binary_crossentropy', optimizer=sgd)
-# Fit the model
-print('fitting')
-model.fit(x, y, nb_epoch=40, batch_size=10)
-# evaluate the model
-scores = model.evaluate(x, y)
-print("%s: %.2f%%" % (model.metrics_names[1], scores[1]*100))
+
+if pelican > 0:
+    """
+    NEURAL NETWORK STARTS HERE
+    """
+    x = sequence.pad_sequences(x, maxlen=longest_sample_len)
+    train_x = x[:half]
+    train_y = y[:half]
+    test_x = x[half:]
+    test_y = y[half:]
+    
+    for epochs in [10, 32, 100, 500, 1000]: 
+        for k in range(5,50,5):
+            model = Sequential()
+            
+            #add layers
+            model.add(Embedding(3000, 32))
+            model.add(LSTM(32))
+            model.add(Dense(32, activation='tanh'))
+            model.add(Dense(1, activation='sigmoid'))
+            
+            # Compile model
+            model.compile(loss='binary_crossentropy', optimizer='sgd',metrics=['accuracy'])
+            
+            # Fit the model
+            #print(model.summary())
+            model.fit(train_x, train_y, nb_epoch=epochs, batch_size=k, verbose=0)
+            # evaluate the model
+            scores = model.evaluate(test_x, test_y, batch_size=32, verbose=0)
+            print("Epochs: " +str(epochs) + " | Batch size: "+ str(k)+ " | Accuracy: " + str(round(scores[1]*100, 2))+"%\n")
+    
 
